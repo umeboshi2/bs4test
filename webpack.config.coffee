@@ -2,9 +2,9 @@ path = require 'path'
 
 webpack = require 'webpack'
 
-#ManifestPlugin = require 'webpack-manifest-plugin'
-#StatsPlugin = require 'stats-webpack-plugin'
-#BundleTracker = require 'webpack-bundle-tracker'
+ManifestPlugin = require 'webpack-manifest-plugin'
+StatsPlugin = require 'stats-webpack-plugin'
+BundleTracker = require 'webpack-bundle-tracker'
 
 #loaders = require 'tbirds/src/webpack/loaders'
 #vendor = require 'tbirds/src/webpack/vendor'
@@ -12,6 +12,10 @@ webpack = require 'webpack'
 #loaderRules = require './loader-rules'
 
 BuildEnvironment = process.env.NODE_ENV
+
+localBuildDir =
+  development: "assets/client-dev"
+  production: "assets/client"
 
 DefinePluginOpts =
   development:
@@ -28,7 +32,13 @@ StatsPluginFilename =
   production: 'stats.json'
 
 common_plugins = [
-  #new webpack.DefinePlugin DefinePluginOpts[BuildEnvironment]
+  new webpack.DefinePlugin DefinePluginOpts[BuildEnvironment]
+  # FIXME common chunk names in reverse order
+  # https://github.com/webpack/webpack/issues/1016#issuecomment-182093533
+  new StatsPlugin StatsPluginFilename[BuildEnvironment], chunkModules: true
+  new ManifestPlugin()
+  new BundleTracker
+    filename: "./#{localBuildDir[BuildEnvironment]}/bundle-stats.json"
   # This is to ignore moment locales with fullcalendar
   # https://github.com/moment/moment/issues/2416#issuecomment-111713308
   new webpack.IgnorePlugin /^\.\/locale$/, /moment$/
@@ -53,7 +63,20 @@ WebPackConfig =
       }
       {
         test: /\.scss$/
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [
+          {
+            loader: 'style-loader'
+          },{
+            loader: 'css-loader'
+          },{
+            loader: 'sass-loader'
+            options:
+              includePaths: [
+                'node_modules/compass-mixins/lib'
+                'node_modules/bootstrap/scss'
+                ]
+          }
+      ]
       }
       {
         test: /\.coffee$/
@@ -71,12 +94,16 @@ WebPackConfig =
   #resolve: resolve
   resolve:
     extensions: [".wasm", ".mjs", ".js", ".json", ".coffee"]
+    alias:
+      sass: path.join __dirname, 'sass'
+      compass: "node_modules/compass-mixins/lib/compass"
+      
   stats:
     colors: true
     modules: false
     chunks: true
     maxModules: 9999
-    #reasons: true
+     #reasons: true
   optimization:
     splitChunks:
       chunks: 'all'

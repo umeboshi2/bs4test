@@ -17,6 +17,7 @@
     "bootstrap": "^4.0.0",
     "coffee-loader": "^0.9.0",
     "coffeescript": "^2.2.2",
+    "compass-mixins": "^0.12.10",
     "css-loader": "^0.28.10",
     "file-loader": "^1.1.11",
     "font-awesome": "^4.7.0",
@@ -25,12 +26,15 @@
     "node-sass": "^4.7.2",
     "popper.js": "^1.12.9",
     "sass-loader": "^6.0.7",
+    "stats-webpack-plugin": "^0.6.2",
     "style-loader": "^0.20.2",
     "teacup": "^2.0.0",
     "underscore": "^1.8.3",
     "url-loader": "^1.0.1",
     "webpack": "^4.1.0",
+    "webpack-bundle-tracker": "^0.2.1",
     "webpack-cli": "^2.0.10",
-    "webpack-dev-server": "^3.1.0"
+    "webpack-dev-server": "^3.1.0",
+    "webpack-manifest-plugin": "^2.0.0-rc.2"
   }
 }
