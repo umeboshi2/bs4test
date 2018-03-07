@@ -5,6 +5,9 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
+// add cornsilk colors
+@import "sass/themes/cornsilk";
+
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
@@ -39,7 +42,6 @@
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/print";
 
-$background: $body-bg ;
 
 .listview-list {
     background: $background;
