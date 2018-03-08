@@ -28,6 +28,7 @@
     "sass-loader": "^6.0.7",
     "stats-webpack-plugin": "^0.6.2",
     "style-loader": "^0.20.2",
+    "tbirds": "^0.3.29",
     "teacup": "^2.0.0",
     "underscore": "^1.8.3",
     "url-loader": "^1.0.1",
