@@ -95,9 +95,10 @@ WebPackConfig =
   resolve:
     extensions: [".wasm", ".mjs", ".js", ".json", ".coffee"]
     alias:
+      applets: path.join __dirname, 'src/applets'
       sass: path.join __dirname, 'sass'
       compass: "node_modules/compass-mixins/lib/compass"
-      
+      tbirds: 'tbirds/src'
   stats:
     colors: true
     modules: false
