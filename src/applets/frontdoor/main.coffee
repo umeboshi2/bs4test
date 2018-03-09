@@ -50,8 +50,6 @@ TkApplet = Toolkit.App.extend
     @_extraRouters[name]
     
       
-module.exports = TkApplet
-
 ################################
 
 
@@ -66,4 +64,5 @@ class Applet extends TkApplet
   Controller: Controller
   Router: Router
 
-module.exports = Applet
+#module.exports = Applet
+export default Applet

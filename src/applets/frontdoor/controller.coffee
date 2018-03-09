@@ -14,6 +14,8 @@ MessageChannel = Backbone.Radio.channel 'messages'
 DocChannel = Backbone.Radio.channel 'static-documents'
 AppChannel = Backbone.Radio.channel 'todos'
 
+#dimport = require '../../di-fill'
+
 toolbarEntries = [
   {
     button: '#list-button'
@@ -37,7 +39,7 @@ AppChannel.reply 'get-toolbar-entries', ->
 
 class Controller extends MainController
   _viewResource: (doc) ->
-    require.ensure [], () =>
+    require.ensure ['./views/index-view'], (require) =>
       View = require './views/index-view'
       view = new View
         model: doc
@@ -45,26 +47,20 @@ class Controller extends MainController
       scroll_top_fast()
     # name the chunk
     , 'frontdoor-view-page'
-    
+
   viewPage: (name) ->
-    @setup_layout_if_needed()
-    doc = DocChannel.request 'get-document', name
-    response = doc.fetch()
-    response.done =>
-      @_viewResource doc
-      return
-    response.fail =>
-      MessageChannel.request 'danger', 'Failed to get document'
-      return
+    @setupLayoutIfNeeded()
+    doc = new Backbone.Model
+      content: "This is just a sentence."
+    @_viewResource doc
     return
     
   viewIndex: ->
-    #@setupLayoutIfNeeded()
     @viewPage 'intro'
     return
 
   themeSwitcher: ->
-    @setup_layout_if_needed()
+    @setupLayoutIfNeeded()
     require.ensure [], () =>
       View = require './views/theme-switch'
       view = new View
