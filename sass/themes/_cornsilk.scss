@@ -1,4 +1,4 @@
-@import "X11colors";
+@import "../X11colors";
 
 //$primary-color: desaturate($color-BlanchedAlmond, 80%);
 $primary: lighten(desaturate($color-cornsilk2, 40%), 10%);
