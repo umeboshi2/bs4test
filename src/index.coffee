@@ -13,7 +13,7 @@ import './applet-router'
 import "bootstrap"
 #import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/scss/font-awesome.scss'
-import 'sass/cornsilk.scss'
+import 'tbirds/sass/cornsilk.scss'
 #import dimport from './di-fill'
 
 
